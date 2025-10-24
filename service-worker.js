@@ -1,5 +1,5 @@
 
-const CACHE = 'math-pwa-v1';
+const CACHE = 'math-pwa-v2';
 const ASSETS = [
   './',
   './index.html',
