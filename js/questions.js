@@ -161,9 +161,16 @@ const LEVELS = {
     generators: [
       // Eigenvalue matriks diagonal
       () => {
-        const a = 1+Math.floor(Math.random()*9);
-        const b = 1+Math.floor(Math.random()*9);
-        return {q:`Eigenvalue dari diag(${a}, ${b})? (pisah dengan koma)`, a:`${a},${b}`};
+        const a = 1 + Math.floor(Math.random() * 9);
+        const b = 1 + Math.floor(Math.random() * 9);
+        const showA = Math.random() < 0.5; // acak apakah a tampil atau b tampil untuk variasi
+        const matrixText = `[[${a}, 0], [0, ${b}]]`;
+
+        return {
+          q: `Diketahui matriks A = ${matrixText}. Tentukan nilai eigenvalue dari matriks A! (pisahkan dengan koma)`,
+          a: `${a},${b}`,
+          explain: `Karena A adalah matriks diagonal, maka elemen diagonalnya (${a} dan ${b}) adalah eigenvalue-nya.`
+        };
       },
       // Kombinatorika sederhana
       () => {
@@ -172,12 +179,23 @@ const LEVELS = {
         // nCr
         function fact(x){ let f=1; for(let i=2;i<=x;i++) f*=i; return f; }
         const ans = fact(n)/(fact(r)*fact(n-r));
-        return {q:`Banyak cara pilih ${r} dari ${n}?`, a:ans};
+        return {q:`Berapa kombinasi jika dipilih ${r} dari ${n} benda berbeda?`, a:ans};
       },
       // Deret konvergen sederhana (konsep)
-      () => {
-        return {q:`Apakah deret ∑ (1/2ⁿ) konvergen? (ya/tidak)`, a:'ya'};
-      }
+        () => {
+          const types = [
+            { text: '∑ (1/2ⁿ)', ans: 'ya', reason: 'r = 1/2 < 1 → deret geometri konvergen.' },
+            { text: '∑ (2ⁿ)', ans: 'tidak', reason: 'r = 2 > 1 → deret geometri divergen.' },
+            { text: '∑ (1/n)', ans: 'tidak', reason: 'deret harmonik divergen meskipun suku mendekati nol.' },
+            { text: '∑ (1/n²)', ans: 'ya', reason: 'p = 2 > 1 → deret p-konvergen.' }
+          ];
+          const pick = types[Math.floor(Math.random() * types.length)];
+          return {
+            q: `Apakah deret ${pick.text} konvergen? (ya/tidak)`,
+            a: pick.ans,
+            explain: pick.reason
+          };
+        }
     ]
   }
 };
