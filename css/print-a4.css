@@ -1,0 +1,7 @@
+
+@page { size: A4; margin: 12mm; }
+.print-receipt, .print-a4 { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto; }
+.print-a4 h1{font-size:20px;margin:0 0 4px 0}
+.print-a4 table{width:100%;border-collapse:collapse}
+.print-a4 th, .print-a4 td{border:1px solid #444;padding:6px;font-size:12px}
+.print-a4 .muted{color:#555}

@@ -1,0 +1,8 @@
+
+@page { size: 58mm auto; margin: 2mm; }
+body{background:white !important;color:black !important}
+.print-receipt{width: 52mm; font-family: monospace; font-size: 11px}
+.print-receipt h2{font-size:14px;margin:0 0 6px 0;text-align:center}
+.print-receipt .line{border-top:1px dashed #000;margin:6px 0}
+.print-receipt .row{display:flex;justify-content:space-between}
+.print-receipt .small{font-size:10px}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belajar Matematika - Offline PWA</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0ea5e9" id="meta-theme-color">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/print-a4.css" media="print">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <img src="icons/icon-192.png" alt="App" class="logo">
+      <div>
+        <h1>Belajar Matematika</h1>
+        <p class="subtitle">Offline • PWA • Statistik • Cetak</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="btn-install" class="btn ghost">Install App</button>
+      <button id="btn-theme" class="btn ghost">Tema</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div>
+          <label for="level" class="label">Pilih Level</label>
+          <select id="level" class="input">
+            <option value="dasar">Dasar (Pondasi Aritmetika)</option>
+            <option value="menengah">Menengah (Pra‑Aljabar & Aljabar)</option>
+            <option value="lanjut">Lanjut (Geometri, Trigonometri, Statistika)</option>
+            <option value="mahir">Mahir (Aljabar Lanjut & Analisis)</option>
+            <option value="expert">Expert (Matematika Tinggi)</option>
+          </select>
+        </div>
+        <div>
+          <label class="label">Mode</label>
+          <div class="segmented">
+            <button class="seg active" data-mode="materi">Materi</button>
+            <button class="seg" data-mode="latihan">Latihan</button>
+            <button class="seg" data-mode="report">Report</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="materi" class="card">
+      <h2>Ringkasan Materi</h2>
+      <p id="materi-text" class="muted"></p>
+      <h3>Contoh Soal</h3>
+      <div id="contoh-wrap" class="example"></div>
+      <details class="mt-2">
+        <summary>Lihat Cara Penyelesaian</summary>
+        <div id="penyelesaian" class="solution"></div>
+      </details>
+    </section>
+
+    <section id="latihan" class="card hidden">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div>
+          <label class="label">Jumlah Soal</label>
+          <input id="jumlah" class="input" type="number" min="5" max="50" value="10">
+        </div>
+        <div>
+          <label class="label">Timer</label>
+          <select id="timer-select" class="input">
+            <option value="off">Tidak ada</option>
+            <option value="300">5 menit</option>
+            <option value="600">10 menit</option>
+            <option value="1200">20 menit</option>
+          </select>
+        </div>
+        <div class="items-end">
+          <button id="btn-start" class="btn primary w-full">Mulai Latihan</button>
+        </div>
+      </div>
+
+      <div id="timer" class="timer hidden">00:00</div>
+      <div id="soal-wrap" class="soal-wrap"></div>
+      <div id="aksi-latihan" class="actions mt-2 hidden">
+        <button id="btn-selesai" class="btn success">Selesai & Simpan</button>
+        <button id="btn-reset" class="btn">Reset</button>
+      </div>
+    </section>
+
+    <section id="report" class="card hidden">
+      <h2>Statistik Kemajuan</h2>
+      <div id="stats" class="stats"></div>
+      <div class="mt-2">
+        <button id="btn-print-a4" class="btn">Cetak A4</button>
+        <button id="btn-print-58" class="btn">Cetak 58mm</button>
+        <button id="btn-export-json" class="btn ghost">Export JSON</button>
+      </div>
+      <div id="print-area" class="print-area"></div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small>© 2025 Belajar. PWA Offline • IndexedDB</small>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/questions.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js');
+      });
+    }
+  </script>
+</body>
+</html>

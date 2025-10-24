@@ -1,0 +1,267 @@
+/* ============================
+   Design Tokens (Dark default)
+   ============================ */
+:root{
+  /* Brand & text */
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+
+  /* Surfaces & borders */
+  --bg:#0b1220;
+  --bg-grad-from:#0b1220;
+  --bg-grad-to:#0a0f1a;
+
+  --card:#111827;
+  --surface:#0d1526;     /* untuk input, panel kecil, badge */
+  --surface-2:#101a2f;   /* untuk button dasar */
+  --chip-active:#15213a; /* segmented active */
+
+  --border:#1f2937;
+
+  /* Accents */
+  --accent:#0ea5e9;
+  --accent-strong:#0284c7;
+  --success:#22c55e;
+  --success-strong:#16a34a;
+
+  /* Inputs */
+  --input-bg:var(--surface);
+  --input-fg:var(--text);
+
+  /* Effects */
+  --shadow:0 10px 30px rgba(0,0,0,.2);
+  --focus:#38bdf8; /* ring biru muda */
+}
+
+/* ============================
+   Light Theme Overrides
+   (aktif saat body memiliki class "light")
+   ============================ */
+body.light{
+  --text:#0f172a;
+  --muted:#475569;
+
+  --bg:#f3f4f6;
+  --bg-grad-from:#f3f6fb;
+  --bg-grad-to:#eef2f7;
+
+  --card:#ffffff;
+  --surface:#f8fafc;
+  --surface-2:#eef2f7;
+  --chip-active:#e7f3ff;
+
+  --border:#e5e7eb;
+
+  --accent:#0ea5e9;
+  --accent-strong:#0284c7;
+  --success:#22c55e;
+  --success-strong:#16a34a;
+
+  --input-bg:#ffffff;
+  --input-fg:#0f172a;
+
+  --shadow:0 8px 24px rgba(15,23,42,.08);
+  --focus:#60a5fa; /* ring biru lebih lembut */
+}
+
+/* ============================
+   Base & Layout
+   ============================ */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto;
+  background:linear-gradient(180deg,var(--bg-grad-from) 0%, var(--bg-grad-to) 100%);
+  color:var(--text);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-header,.app-footer{
+  max-width:1024px;
+  margin:0 auto;
+  padding:12px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{display:flex; gap:12px; align-items:center}
+.logo{width:40px;height:40px;border-radius:12px}
+.subtitle{margin:0;color:var(--muted);font-size:12px}
+
+.container{max-width:1024px;margin:0 auto;padding:16px}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:16px;
+  box-shadow:var(--shadow);
+}
+
+/* Grid utilities */
+.grid{display:grid}
+.grid-cols-1,
+.md\:grid-cols-2,
+.md\:grid-cols-3 { grid-template-columns:1fr; }
+
+@media (min-width:768px){
+  .md\:grid-cols-2{grid-template-columns:repeat(2,1fr)}
+  .md\:grid-cols-3{grid-template-columns:repeat(3,1fr)}
+}
+.gap-3{gap:12px}
+.mt-2{margin-top:12px}
+.w-full{width:100%}
+.hidden{display:none}
+.items-end{display:flex; align-items:flex-end}
+
+/* ============================
+   Form Controls & Segmented
+   ============================ */
+.label{
+  display:block;
+  margin-bottom:6px;
+  color:var(--muted);
+  font-size:14px
+}
+
+.input, select{
+  width:100%;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:var(--input-bg);
+  color:var(--input-fg);
+  outline:none;
+  transition:border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.input:focus, select:focus{
+  border-color:var(--focus);
+  box-shadow:0 0 0 3px color-mix(in srgb, var(--focus) 25%, transparent);
+}
+
+.segmented{
+  display:flex;
+  background:var(--surface);
+  border-radius:12px;
+  padding:4px;
+  gap:4px;
+  border:1px solid var(--border)
+}
+.seg{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  color:var(--text);
+  background:transparent;
+  cursor:pointer;
+  transition:background .2s ease, border-color .2s ease, transform .02s ease-in-out;
+}
+.seg:active{ transform:scale(.98); }
+.seg.active{
+  background:var(--chip-active);
+  border:1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+/* ============================
+   Buttons
+   ============================ */
+.btn{
+  padding:10px 14px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:var(--surface-2);
+  color:var(--text);
+  cursor:pointer;
+  transition:filter .15s ease, transform .02s ease-in-out, background .2s ease, border-color .2s ease;
+}
+.btn:hover{filter:brightness(1.05)}
+.btn:active{transform:scale(.98)}
+.btn.primary{
+  background:var(--accent);
+  border-color:var(--accent-strong);
+  color:#03121e;
+  font-weight:700
+}
+.btn.success{
+  background:var(--success);
+  border-color:var(--success-strong);
+  color:#04130b;
+  font-weight:700
+}
+.btn.ghost{
+  background:transparent
+}
+
+/* ============================
+   Timer & Soal
+   ============================ */
+.timer{
+  font-size:28px;
+  font-weight:700;
+  margin-top:12px;
+  padding:8px 12px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  display:inline-block
+}
+
+.soal-wrap{display:grid; gap:12px; margin-top:12px}
+.soal-item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  align-items:center;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--surface);
+}
+.soal-question{font-weight:600}
+.soal-input{width:120px}
+
+/* ============================
+   Stats & Example/Solution
+   ============================ */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px
+}
+.stat{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px
+}
+.stat h4{margin:0 0 4px 0}
+.stat .big{font-size:28px;margin:2px 0}
+
+.example,.solution{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px
+}
+.muted{color:var(--muted)}
+.app-footer{justify-content:center;color:var(--muted)}
+
+/* ============================
+   Print
+   ============================ */
+.print-area{
+  background:white;
+  color:black;
+  margin-top:12px;
+  padding:12px;
+  border-radius:8px
+}
+
+@media print{
+  body{background:white;color:black}
+  .app-header,.app-footer,.actions,.segmented,.timer{display:none!important}
+  .card{box-shadow:none}
+}
